@@ -26,6 +26,7 @@ EXIT /B 0
 
 :commit_template
 CALL git config commit.template %current_path%\commit-template.txt
+CALL echo [splitscale/config] commit template loaded to this repo
 EXIT /B 0
 
 :invalid_params
