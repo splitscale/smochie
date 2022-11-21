@@ -4,6 +4,23 @@ Enforce standard formatting using this configurations repo
 
 ## Usage
 
+# Using the `ss` command
+
+1. Run this command inside the `configs` repo
+```
+ss init --path
+```
+copy the path and add to `env` (you can search this in the start menu)
+
+
+2. Run now can run this in one of splitscale repos
+> e.g. config, .github, etc.
+```
+ss init -c
+```
+
+# Manual configuration
+
 ### Put the template file here:
 
 ```
