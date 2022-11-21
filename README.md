@@ -1,2 +1,2 @@
-# configs
-Enforse standard formatting
+# Configs
+Enforse standard formatting using this configurations repo
