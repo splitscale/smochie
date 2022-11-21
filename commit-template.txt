@@ -1,0 +1,56 @@
+# No more than 50 chars. #### 50 chars is here: #
+scope: Short description
+# Wrap at 72 chars. ################################## which is here: #
+Description: 
+
+Expected behavior:
+
+Tags:
+# Trailers
+see: Issue #
+
+#######################################################################
+# FOR REFERENCE
+#
+# For the subject line:
+#   * Use 50 characters maximum.
+#   * Do not use a sentence-ending period.
+#
+# For the body text:
+#   * Use as many lines as you like.
+#   * Use 72 characters maximum per line for typical word wrap text.
+#
+# Subject line imperative uppercase verbs that triggers a certain a workflow:
+#
+#   Add = Create a capability e.g. feature, test, dependency.
+#   Drop = Delete a capability e.g. feature, test, dependency.
+#   Fix = Fix an issue e.g. bug, typo, accident, misstatement.
+#   Bump = Increase the version of something e.g. a dependency.
+#   Make = Change the build process, or tools, or infrastructure.
+#   Start = Begin doing something; e.g. enable a toggle, feature flag, etc.
+#   Stop = End doing something; e.g. disable a toggle, feature flag, etc.
+#   Optimize = A change that MUST be just about performance, e.g. speed up code.
+#   Document = A change that MUST be only in the documentation, e.g. help files.
+#   Refactor = A change that MUST be just refactoring.
+#   Reformat = A change that MUST be just format, e.g. indent line, trim space, etc.
+#   Rephrase = A change that MUST be just textual, e.g. edit a comment, doc, etc.
+#
+# FULL EXAMPLE
+# Subject
+# models: Add item card
+# 
+# Description:
+# We do not have card for items
+# We need this to display item info in main menu
+# 
+# Expected behavior:
+# Should be able to display items in the
+# home page.
+# 
+# Tags:
+# - ItemCard
+# - Card
+# - DisplayableObject
+# 
+# Trailers
+# see: Issue #23

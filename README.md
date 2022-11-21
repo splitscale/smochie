@@ -7,18 +7,18 @@ Enforse standard formatting using this configurations repo
 ### Put the template file here:
 
 ```
-~/.git-commit-template.txt
+~/commit-template.txt
 ```
 
 ### Configure git to use the template file by running:
 ```
-git config --global commit.template ~/.git-commit-template.txt
+git config --global commit.template ~/commit-template.txt
 ```
 
 ### Add the template file to the ~/.gitconfig file:
 ```
   [commit]
-    template = ~/.git-commit-template.txt
+    template = ~/commit-template.txt
 ```
 
 If you prefer other file locations or ways of working,
