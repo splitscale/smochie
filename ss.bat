@@ -2,7 +2,7 @@
 SET mypath=%~dp0
 SET current_path=%mypath:~0,-1%
 
-type %current_path%\ascii\runner_banner.txt
+type %current_path%\ascii\banner.txt
 echo.
 type %current_path%\version.txt
 echo.
@@ -32,9 +32,12 @@ EXIT /B 0
 :invalid_params
 echo [WARN] Invalid Parameter!
 echo.
-echo Available commands
 echo.
-echo    [ init <option>]
-echo           -c           initialize commit template
-echo           --path        add path to environment
+echo.
+echo.
+echo	Available commands
+echo.
+echo	init [ option ] 
+echo       -c           initialize commit template
+echo       --path       add path to environment
 EXIT /B 0
