@@ -5,9 +5,6 @@ Description:
 
 Expected behavior:
 
-Tags:
-# Trailers
-see: Issue #
 
 #######################################################################
 # FOR REFERENCE
@@ -46,11 +43,3 @@ see: Issue #
 # Expected behavior:
 # Should be able to display items in the
 # home page.
-# 
-# Tags:
-# - ItemCard
-# - Card
-# - DisplayableObject
-# 
-# Trailers
-# see: Issue #23
