@@ -1,4 +1,10 @@
 @echo off
+
+if "%1"=="-h" (
+  type create-workspace-help.txt
+  exit /b 0
+)
+
 for %%* in (.) do set "workspaceName=%%~n*"
 
 echo Creating new workspace file...
