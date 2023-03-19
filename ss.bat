@@ -11,7 +11,7 @@ echo.
 IF "%~1"=="init" GOTO init
 IF "%~1"=="clone" GOTO clone_repos
 IF "%~1"=="create" GOTO create_workspace
-IF "%~1"=="help" GOTO show_help
+IF "%~1"=="-h" GOTO show_ss_help
 SHIFT
 GOTO invalid_params
 GOTO main
@@ -33,22 +33,15 @@ CALL echo [splitscale/config] commit template loaded to this repo
 EXIT /B 0
 
 :clone_repos
-IF [%~2]==[] GOTO invalid_params
+IF [%~2]==[] GOTO show_clone_repos_help
 SET projectName=%~2
-SET reposDir=%current_path%\repositories\%projectName%
-IF NOT EXIST %reposDir% GOTO missing_repos_dir
-SET reposFile=%current_path%\repositories\%projectName%-dependencies.txt
-IF NOT EXIST %reposFile% GOTO missing_repos_file
-echo Cloning repositories for project %projectName%...
-for /f "tokens=* delims=" %%i in (%reposFile%) do (
-  CALL git clone "%%i" "%reposDir%\%%~nxi"
-)
-echo Done cloning repositories for project %projectName%.
+CALL %current_path%\clone-repos.bat %projectName%
 EXIT /B 0
 
 :create_workspace
+SET args=[%~2]
 echo Creating workspace for current directory...
-CALL %current_path%\create-workspace.bat
+CALL %current_path%\create-workspace.bat %args%
 EXIT /B 0
 
 :missing_repos_dir
@@ -63,8 +56,12 @@ echo Please make sure the file 'repositories\%projectName%-dependencies.txt' exi
 pause
 EXIT /B 1
 
-:show_help
+:show_ss_help
 type %current_path%\ss-help.txt
+EXIT /B 0
+
+:show_clone_repos_help
+type %current_path%\show_clone_repos_help.txt
 EXIT /B 0
 
 :invalid_params
