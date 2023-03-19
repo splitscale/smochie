@@ -1,0 +1,22 @@
+Splitscale Tool
+
+Usage: ss [command] [options]
+
+Commands:
+  init            Initialize the Splitscale tool
+    -c            Initialize commit template
+    --path        Add current directory to environment variables
+  
+  clone           Clone repositories for a project
+    <project_name> Name of the project
+    -p             Path of the project's dependencies file (optional)
+
+  create workspace Create a new Splitscale workspace
+
+Options:
+  -h, --help      Show help message for the command
+
+Examples:
+  ss init -c
+  ss clone my_project -p /path/to/my_project/dependencies.txt
+  ss create workspace
