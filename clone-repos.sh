@@ -26,7 +26,7 @@ fi
 projectName="$1"
 
 if [[ -z "$2" ]]; then
-    repositoryFile="repositories/${projectName}-repo.txt"
+    repositoryFile="$(dirname "$0")/repositories/${projectName}-repo.txt"
 else
     repositoryFile="$2"
 fi
