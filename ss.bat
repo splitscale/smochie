@@ -9,6 +9,9 @@ echo.
 
 :main
 IF "%~1"=="init" GOTO init
+IF "%~1"=="clone" GOTO clone_repos
+IF "%~1"=="create" GOTO create_workspace
+IF "%~1"=="help" GOTO show_help
 SHIFT
 GOTO invalid_params
 GOTO main
@@ -29,15 +32,42 @@ CALL git config commit.template %current_path%\commit-template.txt
 CALL echo [splitscale/config] commit template loaded to this repo
 EXIT /B 0
 
-:invalid_params
-echo [WARN] Invalid Parameter!
-echo.
-echo.
-echo.
-echo.
-echo	Available commands
-echo.
-echo	init [ option ] 
-echo       -c           initialize commit template
-echo       --path       add path to environment
+:clone_repos
+IF [%~2]==[] GOTO invalid_params
+SET projectName=%~2
+SET reposDir=%current_path%\repositories\%projectName%
+IF NOT EXIST %reposDir% GOTO missing_repos_dir
+SET reposFile=%current_path%\repositories\%projectName%-dependencies.txt
+IF NOT EXIST %reposFile% GOTO missing_repos_file
+echo Cloning repositories for project %projectName%...
+for /f "tokens=* delims=" %%i in (%reposFile%) do (
+  CALL git clone "%%i" "%reposDir%\%%~nxi"
+)
+echo Done cloning repositories for project %projectName%.
 EXIT /B 0
+
+:create_workspace
+echo Creating workspace for current directory...
+CALL %current_path%\create-workspace.bat
+EXIT /B 0
+
+:missing_repos_dir
+echo Error: Missing repositories folder for project %projectName%.
+echo Please make sure the folder 'repositories\%projectName%' exists in the current directory.
+pause
+EXIT /B 1
+
+:missing_repos_file
+echo Error: Missing dependencies file for project %projectName%.
+echo Please make sure the file 'repositories\%projectName%-dependencies.txt' exists in the current directory.
+pause
+EXIT /B 1
+
+:show_help
+type %current_path%\ss-help.txt
+EXIT /B 0
+
+:invalid_params
+type %current_path%\ss-help.txt
+pause
+EXIT /B 1
