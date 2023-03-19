@@ -72,3 +72,12 @@ Invalid arguments will show the help menu.
 - `commit-template.txt`: A template for Git commits.
 - `clone-repos.sh`: A script for cloning repositories from a text file.
 - `create-workspace.sh`: A script for creating a new workspace.
+
+# To add a path in macOS:
+
+1. Open Terminal.
+2. Type `nano ~/.bash_profile` and press Enter.
+3. Use the arrow keys to move to the bottom of the file and add a new line.
+4. Type `export PATH=/path/to/directory:$PATH`, replacing "/path/to/directory" with the actual path of the directory you want to add to the PATH.
+5. Press Ctrl+X to exit Nano, then type Y to save the changes and Enter to confirm the filename.
+6. Close the Terminal window and reopen it to activate the new PATH.
