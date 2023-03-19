@@ -1,0 +1,14 @@
+Usage:
+  clone-repos.bat <project-name>
+
+Description:
+  Clones multiple git repositories into a new folder with the specified project name.
+  The script will look for a dependency file with the same name as the project folder
+  in the "repositories" folder. The dependency file should contain the URLs of the
+  repositories to be cloned.
+
+Options:
+  -h, --help   Display this help message
+
+Example:
+  clone-repos.bat my-project
