@@ -1,0 +1,31 @@
+create-workspace.bat - Create a new workspace in Visual Studio Code
+
+Usage:
+  create-workspace.bat [-h]
+
+Options:
+  -h  Display this help message
+
+Description:
+  This script creates a new workspace in Visual Studio Code. The script
+  automatically detects the parent folder name as the workspace name and adds
+  all folders within the directory to the workspace. It can be run by saving
+  it as a `.bat` file in the root directory of the workspace and double-clicking
+  on it.
+
+  The script requires Visual Studio Code to be installed and added to the system's
+  PATH environment variable.
+
+Examples:
+  To create a new workspace, save the `create-workspace.bat` file in the root
+  directory of your workspace and double-click on it.
+
+  To display this help message, run the script with the `-h` option:
+
+    create-workspace.bat -h
+
+Notes:
+  - This script assumes that the code command is already in your system's PATH. If
+    it's not, you'll need to add it manually or modify the script to include the
+    full path to the code command.
+  - The script ignores any folders named "other folder" in the root directory.
