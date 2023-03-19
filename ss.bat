@@ -33,13 +33,13 @@ CALL echo [%current_path%/config] commit template loaded to this repo
 EXIT /B 0
 
 :clone_repos
-SET args=%*
-CALL %current_path%\clone-repos.bat %args%
+
+CALL %current_path%\clone-repos.bat %*
 EXIT /B 0
 
 :create_workspace
-SET args=%*
-CALL %current_path%\create-workspace.bat %args%
+
+CALL %current_path%\create-workspace.bat %*
 EXIT /B 0
 
 :show_ss_help
