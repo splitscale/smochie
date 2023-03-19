@@ -11,10 +11,15 @@ if /I "%~1"=="-h" (
 )
 
 set "projectName=%~1"
-set "dependenciesFile=repositories\%projectName%-dependencies.txt"
 
-if not exist "%dependenciesFile%" (
-  echo Dependencies file not found: %dependenciesFile%
+if "%~2"=="" (
+  set "repositoryFile=repositories\%projectName%-repo.txt"
+) else (
+  set "repositoryFile=%~2"
+)
+
+if not exist "%repositoryFile%" (
+  echo Repo file not found: %repositoryFile%-repo.txt
   exit /b
 )
 
@@ -22,7 +27,7 @@ if not exist "%projectName%" (
   mkdir "%projectName%"
 )
 
-for /F "delims=" %%i in (%dependenciesFile%) do (
+for /F "delims=" %%i in (%repositoryFile%) do (
   git clone "%%i" "%projectName%\%%~nxi"
 )
 

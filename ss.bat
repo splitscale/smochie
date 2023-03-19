@@ -29,32 +29,18 @@ EXIT /B 0
 
 :commit_template
 CALL git config commit.template %current_path%\commit-template.txt
-CALL echo [splitscale/config] commit template loaded to this repo
+CALL echo [%current_path%/config] commit template loaded to this repo
 EXIT /B 0
 
 :clone_repos
-IF [%~2]==[] GOTO show_clone_repos_help
-SET projectName=%~2
-CALL %current_path%\clone-repos.bat %projectName%
+SET args=%*
+CALL %current_path%\clone-repos.bat %args%
 EXIT /B 0
 
 :create_workspace
-SET args=[%~2]
-echo Creating workspace for current directory...
+SET args=%*
 CALL %current_path%\create-workspace.bat %args%
 EXIT /B 0
-
-:missing_repos_dir
-echo Error: Missing repositories folder for project %projectName%.
-echo Please make sure the folder 'repositories\%projectName%' exists in the current directory.
-pause
-EXIT /B 1
-
-:missing_repos_file
-echo Error: Missing dependencies file for project %projectName%.
-echo Please make sure the file 'repositories\%projectName%-dependencies.txt' exists in the current directory.
-pause
-EXIT /B 1
 
 :show_ss_help
 type %current_path%\ss-help.txt
@@ -66,5 +52,4 @@ EXIT /B 0
 
 :invalid_params
 type %current_path%\ss-help.txt
-pause
 EXIT /B 1
