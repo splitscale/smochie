@@ -2,3 +2,5 @@ https://github.com/splitscale/ridesafe_core.git
 https://github.com/splitscale/ridesafe_cloud_database_impl.git
 https://github.com/splitscale/ridesafe_mobile.git
 https://github.com/splitscale/ridesafe_api.git
+https://github.com/splitscale/ridesafe_local_database_impl.git
+https://github.com/splitscale/ridesafe_database_impl.git
