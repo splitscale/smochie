@@ -12,7 +12,7 @@ IF "%~1"=="init" GOTO init
 IF "%~1"=="clone" GOTO clone_repos
 IF "%~1"=="create" GOTO create_workspace
 IF "%~1"=="-h" GOTO show_ss_help
-IF "%~1"=="slaveAll" GOTO slaveAll
+IF "%~1"=="slaves" GOTO slaves
 SHIFT
 GOTO invalid_params
 GOTO main
@@ -48,11 +48,11 @@ type %current_path%\ss-help.txt
 EXIT /B 0
 
 :show_clone_repos_help
-type %current_path%\show_clone_repos_help.txt
+type %current_path%\show-clone-repos-help.txt
 EXIT /B 0
 
-:slaveAll
-CALL %current_path%\slave_all.bat %current_path% %*
+:slaves
+CALL %current_path%\slaves.bat %current_path% %*
 EXIT /B 0
 
 :invalid_params
