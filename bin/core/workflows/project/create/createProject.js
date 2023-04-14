@@ -10,7 +10,7 @@ export class CreateProject {
         const confirmed = await this.promptService.confirmSelection(`Create project '${project.name}' with ${project.repositories.length} repositories?`);
         if (confirmed) {
             await this.interactor.createProject(project);
-            plusSignsLog(1, `Project '${project.name}' created successfully.`);
+            plusSignsLog(1, `Project '${project.name}' created successfully`);
         }
         else {
             console.log('Project creation cancelled.');

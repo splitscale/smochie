@@ -6,3 +6,12 @@
   repositories:
     - awdawd
     - awda
+- name: my-proj
+  repositories:
+    - repo
+    - repo
+    - repo
+- name: adwda
+  repositories:
+    - awd
+    - awd

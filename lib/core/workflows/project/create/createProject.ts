@@ -21,7 +21,7 @@ export class CreateProject {
     if (confirmed) {
       await this.interactor.createProject(project);
 
-      plusSignsLog(1, `Project '${project.name}' created successfully.`);
+      plusSignsLog(1, `Project '${project.name}' created successfully`);
     } else {
       console.log('Project creation cancelled.');
     }
