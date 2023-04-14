@@ -31,7 +31,8 @@ export class GitServiceImpl implements GitService {
     outputDirectory: string
   ): Promise<void> {
     for (const project of projects) {
-      const { name, repositories } = project;
+      const name = project.name;
+      const repositories = project.repositories;
 
       for (const repoUrl of repositories) {
         this.assertValidGitUrl(repoUrl);
@@ -44,7 +45,8 @@ export class GitServiceImpl implements GitService {
 
   cloneProjectsUsingCli(projects: Project[], outputDirectory: string): void {
     for (const project of projects) {
-      const { name, repositories } = project;
+      const name = project.name;
+      const repositories = project.repositories;
 
       for (const repoUrl of repositories) {
         this.assertValidGitUrl(repoUrl);

@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import { parse } from 'yaml';
+import { parse, stringify } from 'yaml';
 export class ProjectRepositoryImpl {
     constructor(filePath) {
         this.filePath = filePath;
@@ -12,15 +12,41 @@ export class ProjectRepositoryImpl {
         }
         projects.push(project);
         await this.saveProjects(projects);
-        return project;
     }
     async getProjectByName(name) {
-        const projects = await this.getAllProjects();
-        return projects.find((p) => p.name === name);
+        const projects = await this.readProjects();
+        const project = projects.find((p) => p.name === name);
+        if (project === undefined) {
+            throw new Error(`Project with name ${name} not found`);
+        }
+        return project;
     }
     async getAllProjects() {
+        const projects = await this.readProjects();
+        return projects;
+    }
+    async updateProjectByName(name, updatedProject) {
+        const projects = await this.readProjects();
+        const index = projects.findIndex((p) => p.name === name);
+        if (index === -1) {
+            throw new Error(`Project with name ${name} not found`);
+        }
+        projects[index] = updatedProject;
+        await this.saveProjects(projects);
+    }
+    async deleteProjectByName(name) {
+        const projects = await this.readProjects();
+        const index = projects.findIndex((p) => p.name === name);
+        if (index === -1) {
+            throw new Error(`Project with name ${name} not found`);
+        }
+        projects.splice(index, 1);
+        await this.saveProjects(projects);
+    }
+    async readProjects() {
         try {
             const data = await fs.readFile(this.filePath);
+            console.log(data.toJSON());
             return parse(data.toString());
         }
         catch (err) {
@@ -28,29 +54,11 @@ export class ProjectRepositoryImpl {
             process.exit(1);
         }
     }
-    async updateProjectByName(name, updates) {
-        const projects = await this.getAllProjects();
-        const projectIndex = projects.findIndex((p) => p.name === name);
-        if (projectIndex === -1) {
-            return undefined;
-        }
-        const updatedProject = Object.assign(Object.assign({}, projects[projectIndex]), updates);
-        projects[projectIndex] = updatedProject;
-        await this.saveProjects(projects);
-        return updatedProject;
-    }
-    async deleteProjectByName(name) {
-        const projects = await this.getAllProjects();
-        const projectIndex = projects.findIndex((p) => p.name === name);
-        if (projectIndex === -1) {
-            return false;
-        }
-        projects.splice(projectIndex, 1);
-        await this.saveProjects(projects);
-        return true;
-    }
     async saveProjects(projects) {
-        const data = projects.map((p) => JSON.stringify(p)).join('\n');
-        await fs.writeFile(this.filePath, data);
+        for (const project of projects) {
+            const data = stringify(project);
+            console.log('Added: ' + data);
+            await fs.writeFile(this.filePath, data);
+        }
     }
 }

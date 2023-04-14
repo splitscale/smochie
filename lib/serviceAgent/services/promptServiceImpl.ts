@@ -1,13 +1,13 @@
 import inquirer from 'inquirer';
 import { Project } from '../../core/project/project.js';
-import { PromptService } from '../../core/services/promptService.js';
 
-export class PromptServiceImpl implements PromptService {
+export class PromptServiceImpl {
   async selectProjects(projects: Project[]): Promise<Project[]> {
     const choices = projects.map((project) => ({
       name: project.name,
       value: project,
     }));
+
     const { selectedProjects } = await inquirer.prompt([
       {
         type: 'checkbox',
@@ -16,6 +16,7 @@ export class PromptServiceImpl implements PromptService {
         choices,
       },
     ]);
+
     return selectedProjects;
   }
 
@@ -28,5 +29,41 @@ export class PromptServiceImpl implements PromptService {
       },
     ]);
     return confirmed;
+  }
+
+  async createProject(): Promise<Project> {
+    const name = await this.requestName();
+    const repositories = await this.requestRepositories();
+    return new Project(name, repositories);
+  }
+
+  private async requestName(): Promise<string> {
+    const { name } = await inquirer.prompt([
+      {
+        type: 'input',
+        message: 'Enter the name of the project:',
+        name: 'name',
+      },
+    ]);
+    return name;
+  }
+
+  private async requestRepositories(
+    repositories: string[] = []
+  ): Promise<string[]> {
+    const repository = await inquirer.prompt([
+      {
+        type: 'input',
+        message:
+          'Enter the URL of a repository to add to the project (submit an empty string to exit):',
+        name: 'repository',
+      },
+    ]);
+
+    if (repository === '') {
+      return repositories;
+    }
+
+    return this.requestRepositories([...repositories, repository]);
   }
 }

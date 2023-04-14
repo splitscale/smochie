@@ -24,7 +24,8 @@ export class GitServiceImpl {
     }
     async cloneProjects(projects, outputDirectory) {
         for (const project of projects) {
-            const { name, repositories } = project;
+            const name = project.name;
+            const repositories = project.repositories;
             for (const repoUrl of repositories) {
                 this.assertValidGitUrl(repoUrl);
                 const repositoryName = this.extractRepoNameFromUrl(repoUrl);
@@ -35,7 +36,8 @@ export class GitServiceImpl {
     }
     cloneProjectsUsingCli(projects, outputDirectory) {
         for (const project of projects) {
-            const { name, repositories } = project;
+            const name = project.name;
+            const repositories = project.repositories;
             for (const repoUrl of repositories) {
                 this.assertValidGitUrl(repoUrl);
                 const repositoryName = this.extractRepoNameFromUrl(repoUrl);

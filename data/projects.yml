@@ -1,4 +1,2 @@
-- name: demo
-  repositories:
-    - https://github.com/splitscale/ditabys-sql.git
-    - https://github.com/jeromecabugwason/tutorial.git
+{"name":"demo","repositories":["https://github.com/splitscale/ditabys-sql.git","https://github.com/jeromecabugwason/tutorial.git"]}
+{"_name":"test-project","_repositories":["repo1","repo2"]}

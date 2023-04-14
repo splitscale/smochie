@@ -1,12 +1,9 @@
 import { Project } from '../project/project.js';
 
 export interface ProjectRepository {
-  createProject(project: Project): Promise<Project>;
-  getProjectByName(name: string): Promise<Project | undefined>;
+  createProject(project: Project): Promise<void>;
+  getProjectByName(name: string): Promise<Project>;
   getAllProjects(): Promise<Project[]>;
-  updateProjectByName(
-    name: string,
-    updates: Partial<Project>
-  ): Promise<Project | undefined>;
-  deleteProjectByName(name: string): Promise<boolean>;
+  updateProjectByName(name: string, updates: Partial<Project>): Promise<void>;
+  deleteProjectByName(name: string): Promise<void>;
 }
