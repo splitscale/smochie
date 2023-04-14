@@ -1,2 +1,8 @@
-{"name":"demo","repositories":["https://github.com/splitscale/ditabys-sql.git","https://github.com/jeromecabugwason/tutorial.git"]}
-{"_name":"test-project","_repositories":["repo1","repo2"]}
+- name: dawda
+  repositories:
+    - awdawdaw
+    - dawd
+- name: awdawd
+  repositories:
+    - awdawd
+    - awda

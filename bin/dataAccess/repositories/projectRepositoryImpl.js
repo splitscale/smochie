@@ -4,17 +4,20 @@ export class ProjectRepositoryImpl {
     constructor(filePath) {
         this.filePath = filePath;
     }
+    assertProjectDoesNotExist(name, projects) {
+        const project = projects.find((project) => project.name === name);
+        if (project) {
+            throw `A project with the name '${name}' already exists`;
+        }
+    }
     async createProject(project) {
         const projects = await this.getAllProjects();
-        const existingProject = projects.find((p) => p.name === project.name);
-        if (existingProject) {
-            throw new Error(`A project with the name '${project.name}' already exists`);
-        }
+        this.assertProjectDoesNotExist(project.name, projects);
         projects.push(project);
         await this.saveProjects(projects);
     }
     async getProjectByName(name) {
-        const projects = await this.readProjects();
+        const projects = await this.getAllProjects();
         const project = projects.find((p) => p.name === name);
         if (project === undefined) {
             throw new Error(`Project with name ${name} not found`);
@@ -22,11 +25,22 @@ export class ProjectRepositoryImpl {
         return project;
     }
     async getAllProjects() {
-        const projects = await this.readProjects();
-        return projects;
+        let data;
+        try {
+            data = await fs.readFile(this.filePath);
+        }
+        catch (error) {
+            console.error(`Failed to read projects: ${error}`);
+            throw error;
+        }
+        const parsed = parse(data.toString());
+        if (parsed === null || parsed === undefined) {
+            throw new Error('Projects is empty');
+        }
+        return parsed;
     }
     async updateProjectByName(name, updatedProject) {
-        const projects = await this.readProjects();
+        const projects = await this.getAllProjects();
         const index = projects.findIndex((p) => p.name === name);
         if (index === -1) {
             throw new Error(`Project with name ${name} not found`);
@@ -35,7 +49,7 @@ export class ProjectRepositoryImpl {
         await this.saveProjects(projects);
     }
     async deleteProjectByName(name) {
-        const projects = await this.readProjects();
+        const projects = await this.getAllProjects();
         const index = projects.findIndex((p) => p.name === name);
         if (index === -1) {
             throw new Error(`Project with name ${name} not found`);
@@ -43,22 +57,8 @@ export class ProjectRepositoryImpl {
         projects.splice(index, 1);
         await this.saveProjects(projects);
     }
-    async readProjects() {
-        try {
-            const data = await fs.readFile(this.filePath);
-            console.log(data.toJSON());
-            return parse(data.toString());
-        }
-        catch (err) {
-            console.error(`Failed to load projects: ${err}`);
-            process.exit(1);
-        }
-    }
     async saveProjects(projects) {
-        for (const project of projects) {
-            const data = stringify(project);
-            console.log('Added: ' + data);
-            await fs.writeFile(this.filePath, data);
-        }
+        const data = stringify(projects);
+        await fs.writeFile(this.filePath, data);
     }
 }

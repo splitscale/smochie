@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import { parse, stringify } from 'yaml';
 import { Project } from '../../core/project/project.js';
 import { ProjectRepository } from '../../core/repositories/projectRepository.js';
+import { gitChangeLogger } from '../../core/util/gitChangeLogger.js';
 
 export class ProjectRepositoryImpl implements ProjectRepository {
   private filePath: string;
@@ -9,21 +10,25 @@ export class ProjectRepositoryImpl implements ProjectRepository {
   constructor(filePath: string) {
     this.filePath = filePath;
   }
+  private assertProjectDoesNotExist(name: string, projects: Project[]): void {
+    const project = projects.find((project) => project.name === name);
+
+    if (project) {
+      throw `A project with the name '${name}' already exists`;
+    }
+  }
 
   async createProject(project: Project): Promise<void> {
     const projects = await this.getAllProjects();
-    const existingProject = projects.find((p) => p.name === project.name);
-    if (existingProject) {
-      throw new Error(
-        `A project with the name '${project.name}' already exists`
-      );
-    }
+    this.assertProjectDoesNotExist(project.name, projects);
+
     projects.push(project);
     await this.saveProjects(projects);
   }
 
   async getProjectByName(name: string): Promise<Project> {
-    const projects = await this.readProjects();
+    const projects = await this.getAllProjects();
+
     const project = projects.find((p) => p.name === name);
 
     if (project === undefined) {
@@ -34,15 +39,29 @@ export class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   async getAllProjects(): Promise<Project[]> {
-    const projects = await this.readProjects();
-    return projects;
+    let data: Buffer;
+
+    try {
+      data = await fs.readFile(this.filePath);
+    } catch (error) {
+      console.error(`Failed to read projects: ${error}`);
+      throw error;
+    }
+
+    const parsed = parse(data.toString());
+
+    if (parsed === null || parsed === undefined) {
+      throw new Error('Projects is empty');
+    }
+
+    return parsed as Project[];
   }
 
   async updateProjectByName(
     name: string,
     updatedProject: Project
   ): Promise<void> {
-    const projects = await this.readProjects();
+    const projects = await this.getAllProjects();
 
     const index = projects.findIndex((p) => p.name === name);
 
@@ -55,7 +74,7 @@ export class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   async deleteProjectByName(name: string): Promise<void> {
-    const projects = await this.readProjects();
+    const projects = await this.getAllProjects();
     const index = projects.findIndex((p) => p.name === name);
 
     if (index === -1) {
@@ -66,25 +85,9 @@ export class ProjectRepositoryImpl implements ProjectRepository {
     await this.saveProjects(projects);
   }
 
-  private async readProjects(): Promise<Project[]> {
-    try {
-      const data = await fs.readFile(this.filePath);
-
-      console.log(data.toJSON());
-
-      return parse(data.toString()) as Project[];
-    } catch (err) {
-      console.error(`Failed to load projects: ${err}`);
-      process.exit(1);
-    }
-  }
-
   private async saveProjects(projects: Project[]): Promise<void> {
-    for (const project of projects) {
-      const data = stringify(project);
+    const data = stringify(projects);
 
-      console.log('Added: ' + data);
-      await fs.writeFile(this.filePath, data);
-    }
+    await fs.writeFile(this.filePath, data);
   }
 }

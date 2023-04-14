@@ -42,10 +42,10 @@ export class PromptServiceImpl {
         return name;
     }
     async requestRepositories(repositories = []) {
-        const repository = await inquirer.prompt([
+        const { repository } = await inquirer.prompt([
             {
                 type: 'input',
-                message: 'Enter the URL of a repository to add to the project (submit an empty string to exit):',
+                message: 'Enter repository URL (submit an empty string to exit):',
                 name: 'repository',
             },
         ]);

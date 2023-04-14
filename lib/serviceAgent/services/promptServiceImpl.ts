@@ -34,6 +34,7 @@ export class PromptServiceImpl {
   async createProject(): Promise<Project> {
     const name = await this.requestName();
     const repositories = await this.requestRepositories();
+
     return new Project(name, repositories);
   }
 
@@ -51,11 +52,10 @@ export class PromptServiceImpl {
   private async requestRepositories(
     repositories: string[] = []
   ): Promise<string[]> {
-    const repository = await inquirer.prompt([
+    const { repository } = await inquirer.prompt<{ repository: string }>([
       {
         type: 'input',
-        message:
-          'Enter the URL of a repository to add to the project (submit an empty string to exit):',
+        message: 'Enter repository URL (submit an empty string to exit):',
         name: 'repository',
       },
     ]);

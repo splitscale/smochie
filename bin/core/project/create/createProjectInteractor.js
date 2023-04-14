@@ -1,8 +1,8 @@
-export class CreateProjectConfigInteractor {
+export class CreateProjectInteractor {
     constructor(repository) {
         this.repository = repository;
     }
-    createProjectsConfig(project) {
+    createProject(project) {
         return this.repository.createProject(project);
     }
 }
