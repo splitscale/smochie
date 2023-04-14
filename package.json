@@ -1,0 +1,39 @@
+{
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.1.5",
+    "isomorphic-git": "^1.23.0",
+    "yaml": "^2.2.1"
+  },
+  "name": "splitscale-cli",
+  "version": "1.0.0",
+  "description": "A command-line tool used to increase productivity.",
+  "main": "./bin/index.js",
+  "type": "module",
+  "bin": {
+    "splitscale-cli": "bin/index.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/splitscale/splitscale-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/splitscale/splitscale-cli/issues"
+  },
+  "homepage": "https://github.com/splitscale/splitscale-cli#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsc && node .",
+    "build": "npx tsc && echo Build output to: ./bin"
+  },
+  "author": "Jerome R. Cabugwason",
+  "license": "ISC"
+}

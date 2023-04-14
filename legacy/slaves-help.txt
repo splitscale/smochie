@@ -1,0 +1,24 @@
+Usage: ss slaves [options] [command]
+
+Traverse all folders under the root folder and execute a specified command.
+
+Arguments:
+  <command>       Required. The command to execute.
+
+Options:
+  --omit          Exclude specified folders from the traversal. folders must be
+                  comma separated.
+  --dir           Set the root folder to the specified directory. Wrap the
+                  directory in double quotes.
+  -h              Show this help message.
+
+Examples:
+  ss slaves --omit node_modules,tests npm run dev
+  ss slaves --dir "C:\project" echo "hello"
+  ss slaves -h
+
+Description:
+  Traverse all folders under the root folder and execute the specified command.
+  Use the [--omit] option to exclude specified folders from the traversal.
+  Use the [--dir] option to set the root folder to the specified directory.
+  Use the [-h] option as the command to show this help message.
