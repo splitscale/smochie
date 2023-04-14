@@ -15,3 +15,7 @@
   repositories:
     - awd
     - awd
+- name: dawd
+  repositories:
+    - awd
+    - awdawda
