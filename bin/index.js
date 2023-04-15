@@ -1,45 +1,23 @@
-import { ProjectRepositoryImpl } from './dataAccess/repositories/projectRepositoryImpl.js';
-import { PromptServiceImpl } from './serviceAgent/services/promptServiceImpl.js';
-import { GitServiceImpl } from './serviceAgent/services/gitServiceImpl.js';
-import { CreateProjectInteractor } from './core/project/create/createProjectInteractor.js';
-import { CloneProject } from './core/workflows/project/clone/cloneProject.js';
-import { CreateProject } from './core/workflows/project/create/createProject.js';
 import { errorLogger } from './core/util/errorLogger.js';
-function processArgs() {
+import { CoreApi } from './api/coreApi.js';
+import { CommandArgsParser } from './commandArgs/commandArgsParser.js';
+const projectsDir = './data/projects.yml';
+const api = new CoreApi();
+const argsParser = new CommandArgsParser();
+try {
     const args = process.argv.slice(2);
-    const command = args[0];
+    const { command, outputPath } = argsParser.parse(args);
     switch (command) {
         case 'clone':
-            const outputPath = args[1];
-            return { command, outputPath };
+            await api.cloneSelectedProjects(outputPath);
+            break;
         case '--create-project':
-            return { command };
+            await api.createNewProject();
+            break;
         default:
             throw new Error(`Invalid command: ${command}`);
     }
 }
-async function main() {
-    try {
-        const { command, outputPath } = processArgs();
-        const projectRepository = new ProjectRepositoryImpl('./data/projects.yml');
-        const promptService = new PromptServiceImpl();
-        const gitService = new GitServiceImpl();
-        const createProject = new CreateProjectInteractor(projectRepository);
-        const projectCloner = new CloneProject(projectRepository, gitService, promptService);
-        const projectCreator = new CreateProject(promptService, createProject);
-        switch (command) {
-            case 'clone':
-                await projectCloner.cloneSelectedProjects(outputPath);
-                break;
-            case '--create-project':
-                await projectCreator.createProject();
-                break;
-            default:
-                throw new Error(`Invalid command: ${command}`);
-        }
-    }
-    catch (error) {
-        errorLogger(error);
-    }
+catch (error) {
+    errorLogger(error);
 }
-main();

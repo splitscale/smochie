@@ -2,7 +2,7 @@ import { ProjectRepository } from '../../../repositories/projectRepository.js';
 import { GitService } from '../../../services/gitService.js';
 import { PromptService } from '../../../services/promptService.js';
 
-export class CloneProject {
+export class CloneProjectWorkflow {
   constructor(
     private readonly projectRepository: ProjectRepository,
     private readonly gitService: GitService,

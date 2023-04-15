@@ -1,5 +1,5 @@
 import { plusSignsLog } from '../../../util/plusSignsLog.js';
-export class CreateProject {
+export class CreateProjectWorkflow {
     constructor(promptService, interactor) {
         this.promptService = promptService;
         this.interactor = interactor;

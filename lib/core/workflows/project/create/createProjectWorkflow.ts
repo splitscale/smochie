@@ -1,9 +1,8 @@
 import { CreateProjectInteractor } from '../../../project/create/createProjectInteractor.js';
 import { PromptService } from '../../../services/promptService.js';
-import { gitChangeLogger } from '../../../util/gitChangeLogger.js';
 import { plusSignsLog } from '../../../util/plusSignsLog.js';
 
-export class CreateProject {
+export class CreateProjectWorkflow {
   constructor(
     private readonly promptService: PromptService,
     private readonly interactor: CreateProjectInteractor
@@ -21,7 +20,7 @@ export class CreateProject {
     if (confirmed) {
       await this.interactor.createProject(project);
 
-      plusSignsLog(1, `Project '${project.name}' created successfully`);
+      plusSignsLog(1, `'${project.name}' created`);
     } else {
       console.log('Project creation cancelled.');
     }
