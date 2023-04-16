@@ -5,10 +5,13 @@ interface ProjectRepository {
   getProjects(): string[];
 }
 
-function ProjectRepositoryImpl(path: string): ProjectRepository {
-  return {
-    getProjects: () => ['Project 1', 'Project 2'],
-  };
+@injectable()
+class ProjectRepositoryImpl implements ProjectRepository {
+  constructor(private path: string) {}
+
+  public getProjects(): string[] {
+    return ['Project 1', 'Project 2'];
+  }
 }
 
 const TYPES = {
@@ -35,11 +38,13 @@ export function trySetup2() {
 
   container
     .bind<ProjectRepository>(TYPES.ProjectRepository)
-    .toDynamicValue(() => {
-      return ProjectRepositoryImpl('path');
-    });
+    .toDynamicValue(() => getProjectRepository());
 
   const projectService = container.resolve<ProjectService>(ProjectService);
 
   console.log(projectService.getProjects()); // Output: ["Project 1", "Project 2"]
+}
+
+export function getProjectRepository(): ProjectRepository {
+  return new ProjectRepositoryImpl('path');
 }
