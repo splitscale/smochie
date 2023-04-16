@@ -18,9 +18,20 @@ export class CloneProjectWorkflow implements Workflow {
 
   async start(): Promise<void> {
     let selectedProjects: Project[] = [];
+    let allProjects: Project[] = [];
 
     try {
-      const allProjects = await this.projectRepository.getAllProjects();
+      allProjects = await this.projectRepository.getAllProjects();
+    } catch (error) {
+      errorLogger('Aborting cloning process...');
+      yellowLogger('PLease create a project first!\n');
+
+      yellowLogger('Try running the following command\n');
+      yellowLogger(`smochie create project\n`);
+      process.exit(0);
+    }
+
+    try {
       selectedProjects = await this.promptService.selectProjects(allProjects);
 
       if (selectedProjects.length === 0) {
@@ -55,10 +66,12 @@ export class CloneProjectWorkflow implements Workflow {
   private cloneProjectsUsingCli(selectedProjects: Project[]) {
     try {
       console.log('Trying to clone projects using the Git CLI...');
+
       this.gitService.cloneProjectsUsingCli(
         selectedProjects,
         this.outputDirectory
       );
+
       console.log('Cloning completed using the Git CLI.');
     } catch (error) {
       errorLogger(

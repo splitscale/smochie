@@ -11,8 +11,18 @@ export class CloneProjectWorkflow {
     }
     async start() {
         let selectedProjects = [];
+        let allProjects = [];
         try {
-            const allProjects = await this.projectRepository.getAllProjects();
+            allProjects = await this.projectRepository.getAllProjects();
+        }
+        catch (error) {
+            errorLogger('Aborting cloning process...');
+            yellowLogger('PLease create a project first!\n');
+            yellowLogger('Try running the following command\n');
+            yellowLogger(`smochie create project\n`);
+            process.exit(0);
+        }
+        try {
             selectedProjects = await this.promptService.selectProjects(allProjects);
             if (selectedProjects.length === 0) {
                 console.log('Aborting cloning process: No projects selected.');

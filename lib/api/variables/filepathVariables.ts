@@ -1,6 +1,13 @@
+import path, { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const dataDir = resolve(__dirname, '..', '..', 'data');
+
 export class FilepathVariables {
-  static projectsRepository = './data/projects.yml';
-  static cloneOutputDir = './cloned-projects';
+  static projectsRepository = path.join(dataDir, 'projects.yml');
+  static cloneOutputDir = './';
 
   static setCloneOutputDir(newPath: string): void {
     if (newPath === '') return;
