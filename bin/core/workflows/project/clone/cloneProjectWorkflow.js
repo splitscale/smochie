@@ -1,5 +1,7 @@
+import { FilepathVariables } from '../../../../api/variables/filepathVariables.js';
 import { errorLogger } from '../../../util/errorLogger.js';
 import { parseError } from '../../../util/parseError.js';
+import { yellowLogger } from '../../../util/yellowLogger.js';
 export class CloneProjectWorkflow {
     constructor(projectRepository, gitService, promptService, outputDirectory) {
         this.projectRepository = projectRepository;
@@ -21,7 +23,7 @@ export class CloneProjectWorkflow {
                 console.log('Aborting cloning process.');
                 return;
             }
-            console.log('Cloning selected projects...');
+            yellowLogger(`Cloning project/s to: ${FilepathVariables.cloneOutputDir}`);
             await this.gitService.cloneProjects(selectedProjects, this.outputDirectory);
             console.log('Cloning completed.');
         }

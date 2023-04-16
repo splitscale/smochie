@@ -7,7 +7,9 @@ const argsParser = new CommandArgsParser();
 export default async function main() {
     try {
         const args = process.argv.slice(2);
-        const { command, outputPath } = argsParser.parse(args);
+        const { command } = argsParser.parse(args);
+        // Set the output path to the current working directory path
+        const outputPath = process.cwd();
         FilepathVariables.setCloneOutputDirWithAssertion(outputPath);
         switch (command) {
             case 'clone':

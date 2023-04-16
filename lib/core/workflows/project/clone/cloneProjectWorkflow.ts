@@ -1,9 +1,11 @@
+import { FilepathVariables } from '../../../../api/variables/filepathVariables.js';
 import { Project } from '../../../project/project.js';
 import { ProjectRepository } from '../../../repositories/projectRepository.js';
 import { GitService } from '../../../services/gitService.js';
 import { PromptService } from '../../../services/promptService.js';
 import { errorLogger } from '../../../util/errorLogger.js';
 import { parseError } from '../../../util/parseError.js';
+import { yellowLogger } from '../../../util/yellowLogger.js';
 import { Workflow } from '../../workflow.js';
 
 export class CloneProjectWorkflow implements Workflow {
@@ -35,7 +37,7 @@ export class CloneProjectWorkflow implements Workflow {
         return;
       }
 
-      console.log('Cloning selected projects...');
+      yellowLogger(`Cloning project/s to: ${FilepathVariables.cloneOutputDir}`);
 
       await this.gitService.cloneProjects(
         selectedProjects,
