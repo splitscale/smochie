@@ -4,7 +4,7 @@ export class CreateProjectWorkflow {
         this.promptService = promptService;
         this.interactor = interactor;
     }
-    async createProject() {
+    async start() {
         const project = await this.promptService.createProject();
         console.log('\x1b[34m%s\x1b[0m', `\n${project.toYamlPreview()}`);
         const confirmed = await this.promptService.confirmSelection(`Create project '${project.name}' with ${project.repositories.length} repositories?`);

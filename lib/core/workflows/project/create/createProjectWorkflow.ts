@@ -1,14 +1,15 @@
 import { CreateProjectInteractor } from '../../../project/create/createProjectInteractor.js';
 import { PromptService } from '../../../services/promptService.js';
 import { plusSignsLog } from '../../../util/plusSignsLog.js';
+import { Workflow } from '../../workflow.js';
 
-export class CreateProjectWorkflow {
+export class CreateProjectWorkflow implements Workflow {
   constructor(
     private readonly promptService: PromptService,
     private readonly interactor: CreateProjectInteractor
   ) {}
 
-  async createProject(): Promise<void> {
+  async start(): Promise<void> {
     const project = await this.promptService.createProject();
 
     console.log('\x1b[34m%s\x1b[0m', `\n${project.toYamlPreview()}`);

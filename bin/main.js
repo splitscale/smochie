@@ -1,6 +1,7 @@
 // import { errorLogger } from './core/util/errorLogger.js';
 // import { CoreApi } from './api/coreApi.js';
 // import { CommandArgsParser } from './commandArgs/commandArgsParser.js';
+import { trySetup2 } from './api/setup2.js';
 // const projectsDir = './data/projects.yml';
 // const api = new CoreApi();
 // const argsParser = new CommandArgsParser();
@@ -23,5 +24,7 @@
 //   }
 // }
 export default async function main() {
-    console.log('hello world');
+    // console.log('hello world');
+    // tryInversify();
+    trySetup2();
 }
