@@ -1,6 +1,9 @@
 # Ignore build output
-dist/
+bin/
 build/
+
+# Ignore old files
+legacy/
 
 # Ignore dependencies
 node_modules/
