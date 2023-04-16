@@ -1,0 +1,17 @@
+Usage: smochie [options] <command>
+
+Options:
+  -h, --help          display this usage guide
+
+Commands:
+  clone               Clone a project from Smochie
+  create project      Create a new project on Smochie
+  create workspace    Create a new workspace on Smochie
+
+Options for 'clone' command:
+  -p, --path <path>   set the output directory path (default: current working directory)
+
+Examples:
+  smochie clone
+  smochie clone -p ~/projects/my-project
+  smochie create project
