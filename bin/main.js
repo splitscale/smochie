@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { errorLogger } from './core/util/errorLogger.js';
 import { CommandArgsParser } from './commandArgs/commandArgsParser.js';
 import { Api } from './api/api.js';
@@ -15,7 +16,7 @@ export default async function main() {
             case 'clone':
                 await Api.workflows.cloneProject.start();
                 break;
-            case '--create-project':
+            case 'create-project':
                 await Api.workflows.createProject.start();
                 break;
             default:

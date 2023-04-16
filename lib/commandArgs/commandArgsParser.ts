@@ -1,5 +1,3 @@
-import { blueLogger } from '../core/util/blueLogger.js';
-
 export class CommandArgsParser {
   parse(args: string[]) {
     const [command, ...commandArgs] = args;
