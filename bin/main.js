@@ -14,6 +14,13 @@ export default async function main() {
             console.log(usage);
             return;
         }
+        if (args.includes('-v') || args.includes('--version')) {
+            const packageJson = readFileSync('./package.json', 'utf8');
+            const version = JSON.parse(packageJson).version;
+            const name = JSON.parse(packageJson).name;
+            console.log(`${name}, Version: ${version}`);
+            return;
+        }
         const { command } = argsParser.parse(args);
         // Set the output path to the current working directory path
         const outputPath = process.cwd();
