@@ -93,3 +93,25 @@ Project directory should look like this:
 This project directory structure organizes the codebase into different directories based on their functionalities.
 
 This directory structure allows for a modular and scalable codebase, where different functionalities can be developed and maintained separately. It also helps with code reusability and code maintainability, as each directory can have its own set of tests, documentation, and version control.
+
+# Usage
+
+```
+Usage: smochie [options] <command>
+
+Options:
+  -h, --help          display this usage guide
+
+Commands:
+  clone               Clone a project from Smochie
+  create project      Create a new project on Smochie
+  create workspace    Create a new workspace on Smochie
+
+Options for 'clone' command:
+  -p, --path <path>   set the output directory path (default: current working directory)
+
+Examples:
+  smochie clone
+  smochie clone -p ~/projects/my-project
+  smochie create project
+```
