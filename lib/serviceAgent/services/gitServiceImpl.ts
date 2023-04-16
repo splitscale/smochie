@@ -4,15 +4,9 @@ import http from 'isomorphic-git/http/node/index.js';
 import { Project } from '../../core/project/project.js';
 import { exec } from 'child_process';
 import { GitService } from '../../core/services/gitService.js';
+import { assertValidGitUrl } from '../../core/util/assertValidUrl.js';
 
 export class GitServiceImpl implements GitService {
-  private assertValidGitUrl(url: string): void {
-    const regex = /^https?:\/\/github\.com\/.+\.git$/;
-    if (!regex.test(url)) {
-      throw new Error(`Invalid git URL format: ${url}`);
-    }
-  }
-
   private async cloneRepo(repoUrl: string, localPath: string): Promise<void> {
     try {
       await git.clone({
@@ -35,7 +29,7 @@ export class GitServiceImpl implements GitService {
       const repositories = project.repositories;
 
       for (const repoUrl of repositories) {
-        this.assertValidGitUrl(repoUrl);
+        assertValidGitUrl(repoUrl);
         const repositoryName = this.extractRepoNameFromUrl(repoUrl);
         const localPath = `${outputDirectory}/${name}/${repositoryName}`;
         await this.cloneRepo(repoUrl, localPath);
@@ -49,7 +43,7 @@ export class GitServiceImpl implements GitService {
       const repositories = project.repositories;
 
       for (const repoUrl of repositories) {
-        this.assertValidGitUrl(repoUrl);
+        assertValidGitUrl(repoUrl);
         const repositoryName = this.extractRepoNameFromUrl(repoUrl);
         const localPath = `${outputDirectory}/${name}/${repositoryName}`;
         try {

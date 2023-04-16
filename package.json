@@ -2,6 +2,7 @@
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
     "typescript": "^5.0.4"
   },
   "dependencies": {
@@ -33,7 +34,7 @@
   "homepage": "https://github.com/splitscale/splitscale-cli#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tsc && node .",
+    "dev": "nodemon -w",
     "build": "npx tsc && echo Build output to: ./bin"
   },
   "author": "Jerome R. Cabugwason",

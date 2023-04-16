@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import { Project } from '../../core/project/project.js';
+import { validateRepositories } from '../../core/util/validateRepositories.js';
 export class PromptServiceImpl {
     async selectProjects(projects) {
         const choices = projects.map((project) => ({
@@ -29,6 +30,7 @@ export class PromptServiceImpl {
     async createProject() {
         const name = await this.requestName();
         const repositories = await this.requestRepositories();
+        await validateRepositories(repositories);
         return new Project(name, repositories);
     }
     async requestName() {

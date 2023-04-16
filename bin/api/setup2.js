@@ -12,18 +12,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, Container, inject } from 'inversify';
 import 'reflect-metadata';
-let ProjectRepositoryImpl = class ProjectRepositoryImpl {
+class ProjectRepositoryImpl {
     constructor(path) {
         this.path = path;
     }
     getProjects() {
-        return ['Project 1', 'Project 2'];
+        return ['Project 1', 'Project 2', 'Project 3'];
     }
-};
-ProjectRepositoryImpl = __decorate([
-    injectable(),
-    __metadata("design:paramtypes", [String])
-], ProjectRepositoryImpl);
+}
 const TYPES = {
     ProjectRepository: Symbol.for('ProjectRepository'),
 };
@@ -43,12 +39,15 @@ ProjectService = __decorate([
 export { ProjectService };
 export function trySetup2() {
     const container = new Container();
+    const config = new ProjectServiceConfig();
     container
         .bind(TYPES.ProjectRepository)
-        .toDynamicValue(() => getProjectRepository());
+        .toDynamicValue(() => config.getProjectRepository());
     const projectService = container.resolve(ProjectService);
     console.log(projectService.getProjects()); // Output: ["Project 1", "Project 2"]
 }
-export function getProjectRepository() {
-    return new ProjectRepositoryImpl('path');
+class ProjectServiceConfig {
+    getProjectRepository() {
+        return new ProjectRepositoryImpl('path');
+    }
 }

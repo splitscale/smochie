@@ -5,12 +5,11 @@ interface ProjectRepository {
   getProjects(): string[];
 }
 
-@injectable()
 class ProjectRepositoryImpl implements ProjectRepository {
   constructor(private path: string) {}
 
   public getProjects(): string[] {
-    return ['Project 1', 'Project 2'];
+    return ['Project 1', 'Project 2', 'Project 3'];
   }
 }
 
@@ -35,16 +34,19 @@ export class ProjectService {
 
 export function trySetup2() {
   const container = new Container();
+  const config = new ProjectServiceConfig();
 
   container
     .bind<ProjectRepository>(TYPES.ProjectRepository)
-    .toDynamicValue(() => getProjectRepository());
+    .toDynamicValue(() => config.getProjectRepository());
 
   const projectService = container.resolve<ProjectService>(ProjectService);
 
   console.log(projectService.getProjects()); // Output: ["Project 1", "Project 2"]
 }
 
-export function getProjectRepository(): ProjectRepository {
-  return new ProjectRepositoryImpl('path');
+class ProjectServiceConfig {
+  getProjectRepository(): ProjectRepository {
+    return new ProjectRepositoryImpl('path');
+  }
 }
