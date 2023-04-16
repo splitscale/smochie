@@ -14,15 +14,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Fetch all tags
+      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
     - name: Bump version
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # Get the latest tag
         latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-
+        
         # Bump the version number
         npm version patch
-
+        
         # Push the new commit and tag
         git push origin HEAD:${GITHUB_REF} --tags
