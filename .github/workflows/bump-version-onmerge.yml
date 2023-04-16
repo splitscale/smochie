@@ -1,0 +1,28 @@
+name: Bump Version on Merge
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Bump version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Get the latest tag
+        latest_tag=$(git describe --tags --abbrev=0)
+
+        # Bump the version number
+        npm version patch
+
+        # Push the new commit and tag
+        git push origin HEAD:${GITHUB_REF} --tags
