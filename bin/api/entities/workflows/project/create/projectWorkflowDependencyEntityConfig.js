@@ -5,12 +5,11 @@ import { ProjectRepositoryImpl } from '../../../../../dataAccess/repositories/pr
 import { GitServiceImpl } from '../../../../../serviceAgent/services/gitServiceImpl.js';
 import { PromptServiceImpl } from '../../../../../serviceAgent/services/promptServiceImpl.js';
 import { FilepathVariables } from '../../../../variables/filepathVariables.js';
-export class ProjectWorkflowEntityDependencyConfig {
+export class ProjectWorkflowEntityDependencyEntityConfig {
     getPromptService() {
         return new PromptServiceImpl();
     }
     getProjectRepository() {
-        console.log('====>', FilepathVariables.projectsRepository);
         return new ProjectRepositoryImpl(FilepathVariables.projectsRepository);
     }
     getCreateProjectInteractor() {
@@ -23,6 +22,6 @@ export class ProjectWorkflowEntityDependencyConfig {
         return new CreateProjectWorkflow(this.getPromptService(), this.getCreateProjectInteractor());
     }
     getCloneProjectWorkflow() {
-        return new CloneProjectWorkflow(this.getProjectRepository(), this.getGitService(), this.getPromptService(), FilepathVariables.cloneOutputDir);
+        return new CloneProjectWorkflow(this.getProjectRepository(), this.getGitService(), this.getPromptService(), FilepathVariables.currentDir);
     }
 }

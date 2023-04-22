@@ -69,4 +69,15 @@ export class PromptServiceImpl {
 
     return this.requestRepositories([...repositories, repository]);
   }
+
+  async promptWorkspaceName(): Promise<string> {
+    const { name } = await inquirer.prompt([
+      {
+        type: 'input',
+        message: 'Enter the name of the workspace:',
+        name: 'name',
+      },
+    ]);
+    return name;
+  }
 }

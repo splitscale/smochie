@@ -12,15 +12,15 @@ export class FilepathVariables {
     return path.join(dataDir, 'projects.yml');
   }
 
-  static cloneOutputDir = './';
+  static currentDir = './';
 
-  static setCloneOutputDir(newPath: string): void {
+  static setCurrentDir(newPath: string): void {
     if (newPath === '') return;
-    this.cloneOutputDir = newPath;
+    this.currentDir = newPath;
   }
 
   static setCloneOutputDirWithAssertion(newPath: string | undefined) {
-    this.setCloneOutputDir(newPath !== undefined ? newPath : '');
+    this.setCurrentDir(newPath !== undefined ? newPath : '');
   }
 
   static getSmochieDir(filename: string): string {

@@ -9,18 +9,18 @@ class FilepathVariables {
         const dataDir = path.join(documentsDir, 'smochie', 'data');
         return path.join(dataDir, 'projects.yml');
     }
-    static setCloneOutputDir(newPath) {
+    static setCurrentDir(newPath) {
         if (newPath === '')
             return;
-        this.cloneOutputDir = newPath;
+        this.currentDir = newPath;
     }
     static setCloneOutputDirWithAssertion(newPath) {
-        this.setCloneOutputDir(newPath !== undefined ? newPath : '');
+        this.setCurrentDir(newPath !== undefined ? newPath : '');
     }
     static getSmochieDir(filename) {
         const root = resolve(__dirname, '..', '..', '..');
         return path.join(root, filename);
     }
 }
-FilepathVariables.cloneOutputDir = './';
+FilepathVariables.currentDir = './';
 export { FilepathVariables };

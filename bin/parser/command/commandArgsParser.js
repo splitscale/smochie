@@ -33,7 +33,7 @@ export class CommandArgsParser {
         let outputPath;
         if (args.length === 0) {
             // If no arguments are passed, use the current working directory as the output path
-            outputPath = FilepathVariables.cloneOutputDir;
+            outputPath = FilepathVariables.currentDir;
         }
         else {
             // Look for the --path or -p flags

@@ -1,4 +1,3 @@
-import { FilepathVariables } from '../../../../api/variables/filepathVariables.js';
 import { Project } from '../../../project/project.js';
 import { ProjectRepository } from '../../../repositories/projectRepository.js';
 import { GitService } from '../../../services/gitService.js';
@@ -48,7 +47,7 @@ export class CloneProjectWorkflow implements Workflow {
         return;
       }
 
-      yellowLogger(`Cloning project/s to: ${FilepathVariables.cloneOutputDir}`);
+      yellowLogger(`Cloning project/s to: ${this.outputDirectory}`);
 
       await this.gitService.cloneProjects(
         selectedProjects,

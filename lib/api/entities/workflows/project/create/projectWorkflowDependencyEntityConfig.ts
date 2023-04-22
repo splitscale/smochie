@@ -6,13 +6,12 @@ import { GitServiceImpl } from '../../../../../serviceAgent/services/gitServiceI
 import { PromptServiceImpl } from '../../../../../serviceAgent/services/promptServiceImpl.js';
 import { FilepathVariables } from '../../../../variables/filepathVariables.js';
 
-export class ProjectWorkflowEntityDependencyConfig {
+export class ProjectWorkflowEntityDependencyEntityConfig {
   getPromptService() {
     return new PromptServiceImpl();
   }
 
   getProjectRepository() {
-    console.log('====>', FilepathVariables.projectsRepository);
     return new ProjectRepositoryImpl(FilepathVariables.projectsRepository);
   }
 
@@ -36,7 +35,7 @@ export class ProjectWorkflowEntityDependencyConfig {
       this.getProjectRepository(),
       this.getGitService(),
       this.getPromptService(),
-      FilepathVariables.cloneOutputDir
+      FilepathVariables.currentDir
     );
   }
 }

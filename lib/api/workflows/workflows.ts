@@ -1,6 +1,7 @@
 import { Workflow } from '../../core/workflows/workflow.js';
 import { cloneProjectWorkflowContainer } from '../configs/workflows/project/clone/cloneProjectWorkflowContainer.config.js';
 import { createProjectWorkflowContainer } from '../configs/workflows/project/create/createProjectWorkflowContainer.config.js';
+import { createWorkspaceWorkflowContainer } from '../configs/workflows/project/create/createWorkspaceWorkflowContainer.config.js';
 import { WorkflowTypes } from '../types/workflowTypes.js';
 
 export class Workflows {
@@ -10,5 +11,11 @@ export class Workflows {
 
   get cloneProject() {
     return cloneProjectWorkflowContainer.get<Workflow>(WorkflowTypes.Workflow);
+  }
+
+  get createWorkspace() {
+    return createWorkspaceWorkflowContainer.get<Workflow>(
+      WorkflowTypes.Workflow
+    );
   }
 }

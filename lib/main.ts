@@ -19,43 +19,46 @@ function readPackageJson(): string {
 }
 
 export default async function main() {
-  // try {
-  const args = process.argv.slice(2);
+  try {
+    // Set the output path to the current working directory path
+    const outputPath = process.cwd();
+    FilepathVariables.setCloneOutputDirWithAssertion(
+      SystemDirParser.format(outputPath)
+    );
 
-  if (args.includes('-h') || args.includes('--help')) {
+    const args = process.argv.slice(2);
+
+    if (args.includes('-h') || args.includes('--help')) {
+      console.log(readUsage());
+      return;
+    }
+
+    if (args.includes('-v') || args.includes('--version')) {
+      const packageJson = readPackageJson();
+      const version = JSON.parse(packageJson).version;
+      const name = JSON.parse(packageJson).name;
+
+      console.log(`${name}, Version: ${version}`);
+      return;
+    }
+
+    const { command } = argsParser.parse(args);
+
+    switch (command) {
+      case 'clone':
+        await Api.workflows.cloneProject.start();
+        break;
+      case 'create-project':
+        await Api.workflows.createProject.start();
+        break;
+      case 'create-workspace':
+        await Api.workflows.createWorkspace.start();
+        break;
+      default:
+        throw new Error(`Invalid command: ${command}`);
+    }
+  } catch (error) {
     console.log(readUsage());
-    return;
+    errorLogger(parseError(error));
   }
-
-  if (args.includes('-v') || args.includes('--version')) {
-    const packageJson = readPackageJson();
-    const version = JSON.parse(packageJson).version;
-    const name = JSON.parse(packageJson).name;
-
-    console.log(`${name}, Version: ${version}`);
-    return;
-  }
-
-  const { command } = argsParser.parse(args);
-
-  // Set the output path to the current working directory path
-  const outputPath = process.cwd();
-  FilepathVariables.setCloneOutputDirWithAssertion(
-    SystemDirParser.format(outputPath)
-  );
-
-  switch (command) {
-    case 'clone':
-      await Api.workflows.cloneProject.start();
-      break;
-    case 'create-project':
-      await Api.workflows.createProject.start();
-      break;
-    default:
-      throw new Error(`Invalid command: ${command}`);
-  }
-  // } catch (error) {
-  //   console.log(readUsage());
-  //   errorLogger(parseError(error));
-  // }
 }
