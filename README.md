@@ -6,6 +6,14 @@ This tool is designed for developers who want to streamline their workflow. Smoc
 
 Whether you're a solo developer or part of a team, Smochie CLI makes it easy to manage your projects and stay organized. Get started with Smochie today and take your project management to the next level!
 
+# Compatibility
+
+| OS | Compatible |
+|:-------:|:----------:|
+|  <img src="https://i1.wp.com/www.nesabamedia.com/wp-content/uploads/2021/06/Windows-11-Logo.png?resize=680%2C680&ssl=1" width="24"> windows  |  :heavy_check_mark:   |
+|  <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" width="24"> linux  |  :heavy_check_mark:   |
+|  <img src="https://pnggrid.com/wp-content/uploads/2021/04/white-apple-1252x1536.png" width="24"> mac  |  :x:   |
+
 # Installation
 
 To use Smochie, you'll first need to install the Smochie CLI tool. You can do this using npm, the Node.js package manager.
