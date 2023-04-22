@@ -49,7 +49,7 @@ export class ProjectRepositoryImpl implements ProjectRepository {
     let data: Buffer;
 
     try {
-      data = await fs.readFile(path.dirname(this.filePath));
+      data = await fs.readFile(this.filePath);
     } catch (error) {
       console.error(`Failed to read projects: ${error}`);
       throw error;
@@ -94,7 +94,7 @@ export class ProjectRepositoryImpl implements ProjectRepository {
 
   private async saveProjects(projects: Project[]): Promise<void> {
     const data = stringify(projects);
-    await fs.mkdir(path.dirname(this.filePath), { recursive: true });
+    await fs.mkdir(this.filePath, { recursive: true });
     await fs.writeFile(this.filePath, data);
   }
 }

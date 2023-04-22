@@ -1,6 +1,5 @@
 import fs from 'fs/promises';
 import { parse, stringify } from 'yaml';
-import path from 'path';
 import { yellowLogger } from '../../core/util/yellowLogger.js';
 export class ProjectRepositoryImpl {
     constructor(filePath) {
@@ -35,7 +34,7 @@ export class ProjectRepositoryImpl {
     async getAllProjects() {
         let data;
         try {
-            data = await fs.readFile(path.dirname(this.filePath));
+            data = await fs.readFile(this.filePath);
         }
         catch (error) {
             console.error(`Failed to read projects: ${error}`);
@@ -67,7 +66,7 @@ export class ProjectRepositoryImpl {
     }
     async saveProjects(projects) {
         const data = stringify(projects);
-        await fs.mkdir(path.dirname(this.filePath), { recursive: true });
+        await fs.mkdir(this.filePath, { recursive: true });
         await fs.writeFile(this.filePath, data);
     }
 }

@@ -1,9 +1,14 @@
 import path, { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import os from 'os';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const dataDir = resolve(__dirname, '..', '..', 'data');
 class FilepathVariables {
+    static get projectsRepository() {
+        const documentsDir = path.join(os.homedir(), 'Documents');
+        const dataDir = path.join(documentsDir, 'smochie', 'data');
+        return path.join(dataDir, 'projects.yml');
+    }
     static setCloneOutputDir(newPath) {
         if (newPath === '')
             return;
@@ -12,7 +17,10 @@ class FilepathVariables {
     static setCloneOutputDirWithAssertion(newPath) {
         this.setCloneOutputDir(newPath !== undefined ? newPath : '');
     }
+    static getSmochieDir(filename) {
+        const root = resolve(__dirname, '..', '..', '..');
+        return path.join(root, filename);
+    }
 }
-FilepathVariables.projectsRepository = path.join(dataDir, 'projects.yml');
 FilepathVariables.cloneOutputDir = './';
 export { FilepathVariables };

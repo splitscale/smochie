@@ -10,6 +10,7 @@ export class ProjectWorkflowEntityDependencyConfig {
         return new PromptServiceImpl();
     }
     getProjectRepository() {
+        console.log('====>', FilepathVariables.projectsRepository);
         return new ProjectRepositoryImpl(FilepathVariables.projectsRepository);
     }
     getCreateProjectInteractor() {

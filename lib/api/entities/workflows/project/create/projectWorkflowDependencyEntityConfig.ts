@@ -12,6 +12,7 @@ export class ProjectWorkflowEntityDependencyConfig {
   }
 
   getProjectRepository() {
+    console.log('====>', FilepathVariables.projectsRepository);
     return new ProjectRepositoryImpl(FilepathVariables.projectsRepository);
   }
 

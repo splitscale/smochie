@@ -1,4 +1,4 @@
-import { FilepathVariables } from '../api/variables/filepathVariables.js';
+import { FilepathVariables } from '../../api/variables/filepathVariables.js';
 export class CommandArgsParser {
     parse(args) {
         const [command, ...commandArgs] = args;
