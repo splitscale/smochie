@@ -9,19 +9,27 @@ import { FilepathVariables } from './api/variables/filepathVariables.js';
 import { readFileSync } from 'fs';
 
 const argsParser = new CommandArgsParser();
+const smochieRoot = FilepathVariables.getSmochieDir();
+
+function readUsage(): string {
+  return readFileSync(`./${smochieRoot}/usage.txt`, 'utf8');
+}
+
+function readPackageJson(): string {
+  return readFileSync(`./${smochieRoot}/package.json`, 'utf8');
+}
 
 export default async function main() {
   try {
     const args = process.argv.slice(2);
 
     if (args.includes('-h') || args.includes('--help')) {
-      const usage = readFileSync('./usage.txt', 'utf8');
-      console.log(usage);
+      console.log(readUsage());
       return;
     }
 
     if (args.includes('-v') || args.includes('--version')) {
-      const packageJson = readFileSync('./package.json', 'utf8');
+      const packageJson = readPackageJson();
       const version = JSON.parse(packageJson).version;
       const name = JSON.parse(packageJson).name;
 
@@ -46,8 +54,7 @@ export default async function main() {
         throw new Error(`Invalid command: ${command}`);
     }
   } catch (error) {
-    const usage = readFileSync('./usage.txt', 'utf8');
-    console.error(usage);
+    console.log(readUsage());
     errorLogger(parseError(error));
   }
 }
