@@ -78,14 +78,14 @@ Smochie provides several commands for managing Smochie projects. The currently a
 - `create project`: Creates a new Smochie project in the current directory or a specified output directory.
 - `create workspace`: Creates a new Smochie workspace in the current directory or a specified output directory.
 
-To get more information about a specific command and its options, you can use the `--help` or `-h` flag. For example:
+To get more information, you can use the `--help` or `-h` flag. For example:
 
 ```
-smochie clone --help
+smochie --help
 ```
 
 ```
-smochie clone -h
+smochie -h
 ```
 
 This will display the help text for smochie, including a list of available options and their descriptions.
