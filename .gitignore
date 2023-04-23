@@ -1,6 +1,9 @@
-# Ignore build output
-build/
-bin/
+# Ignore the bin directory when tracking changes with Git
+/bin
+
+# Include the bin directory when publishing the package to npm
+!/bin/*
+!/bin/**/*
 
 # Ignore old files
 legacy/

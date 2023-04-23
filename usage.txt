@@ -7,11 +7,19 @@ Commands:
   clone               Clone a project from Smochie
   create project      Create a new project on Smochie
   create workspace    Create a new workspace on Smochie
+  slave               Run a command on specified subfolders in the current directory
 
 Options for 'clone' command:
   -p, --path <path>   set the output directory path (default: current working directory)
+
+Options for 'slave' command:
+  -s, --select        select subfolders to run the command on (default: all subfolders in the current directory)
+  -o, --omit          omit subfolders from running the command
+                      (default: no subfolders omitted; takes precedence over --select)
 
 Examples:
   smochie clone
   smochie clone -p ~/projects/my-project
   smochie create project
+  smochie slave npm test -s
+  smochie slave npm test -o node_modules -o dist
