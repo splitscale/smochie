@@ -1,5 +1,6 @@
 # Ignore build output
 build/
+bin/
 
 # Ignore old files
 legacy/

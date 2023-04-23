@@ -48,11 +48,13 @@ export class WorkspaceServiceImpl implements WorkspaceService {
     try {
       if (process.platform === 'win32') {
         spawn('cmd', ['/c', 'start', workspacePath], { detached: true });
-      } else if (process.platform === 'darwin') {
-        spawn('open', [workspacePath], { detached: true });
-      } else {
-        spawn('xdg-open', [workspacePath], { detached: true });
       }
+
+      if (process.platform === 'darwin') {
+        spawn('open', [workspacePath], { detached: true });
+      }
+
+      spawn('xdg-open', [workspacePath], { detached: true });
     } catch (err) {
       throw new Error(`Error opening workspace: ${parseError(err)}`);
     }

@@ -1,3 +1,3 @@
-export interface Workflow {
-  start(): Promise<void>;
+export interface Workflow<T extends any[] = []> {
+  start(...args: T): Promise<void>;
 }
