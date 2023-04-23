@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 import { Project } from '../../core/project/project.js';
 import { validateRepositories } from '../../core/util/validateRepositories.js';
+import path from 'path';
 
 export class PromptServiceImpl {
   async selectProjects(projects: Project[]): Promise<Project[]> {
@@ -79,5 +80,41 @@ export class PromptServiceImpl {
       },
     ]);
     return name;
+  }
+
+  async promptExcludedFolders(folders: string[]): Promise<string[]> {
+    const choices = folders.map((folder) => ({
+      name: path.basename(folder),
+      value: folder,
+    }));
+
+    const { excludedFolders } = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        message: 'Select folders to exclude:',
+        name: 'excludedFolders',
+        choices: choices,
+      },
+    ]);
+
+    return excludedFolders;
+  }
+
+  async promptIncludedFolders(folders: string[]): Promise<string[]> {
+    const choices = folders.map((folder) => ({
+      name: path.basename(folder),
+      value: folder,
+    }));
+
+    const { includedFolders } = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        message: 'Select folders to include:',
+        name: 'includedFolders',
+        choices: choices,
+      },
+    ]);
+
+    return includedFolders;
   }
 }

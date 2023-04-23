@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.15.13",
     "nodemon": "^2.0.22",
     "typescript": "^5.0.4"
   },
@@ -14,7 +14,7 @@
     "yaml": "^2.2.1"
   },
   "name": "smochie",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A command-line tool used to increase productivity and project management.",
   "main": "app.js",
   "type": "module",
@@ -34,7 +34,7 @@
   "homepage": "https://github.com/splitscale/smochie#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -w",
+    "dev": "npx tsc -w",
     "build": "npx tsc && echo Build output to: ./bin"
   },
   "author": "Jerome R. Cabugwason",
