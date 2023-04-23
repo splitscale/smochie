@@ -1,4 +1,6 @@
-# Smochie
+<img src="./logo.png" width="300" />
+
+[![npm](https://img.shields.io/npm/v/smochie.svg)](https://www.npmjs.com/package/smochie)
 
 Smochie, a multi-dependency project manager able to manage multiple GitHub repositories that make up the application. With Smochie, you can easily clone existing projects and their dependencies, execute commands in multiple folders under a root directory, and workspaces, and manage your projects with ease.
 
@@ -8,11 +10,11 @@ Whether you're a solo developer or part of a team, Smochie CLI makes it easy to 
 
 # Compatibility
 
-| OS | Compatible |
-|:-------:|:----------:|
-|  <img src="https://i1.wp.com/www.nesabamedia.com/wp-content/uploads/2021/06/Windows-11-Logo.png?resize=680%2C680&ssl=1" width="24"> windows  |  :heavy_check_mark:   |
-|  <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" width="24"> linux  |  :heavy_check_mark:   |
-|  <img src="https://pnggrid.com/wp-content/uploads/2021/04/white-apple-1252x1536.png" width="24"> mac  |  :x:   |
+|                                                                     OS                                                                     |     Compatible     |
+| :----------------------------------------------------------------------------------------------------------------------------------------: | :----------------: |
+| <img src="https://i1.wp.com/www.nesabamedia.com/wp-content/uploads/2021/06/Windows-11-Logo.png?resize=680%2C680&ssl=1" width="24"> windows | :heavy_check_mark: |
+|                          <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" width="24"> linux                          | :heavy_check_mark: |
+|                    <img src="https://pnggrid.com/wp-content/uploads/2021/04/white-apple-1252x1536.png" width="24"> mac                     |        :x:         |
 
 # Installation
 
@@ -55,6 +57,7 @@ The basic syntax for running a Smochie command is as follows:
 ```
 smochie <command> [options]
 ```
+
 Here, `<command>` is the name of the Smochie command you want to run, and `[options]` are any additional options or arguments that the command requires. For example, to clone a Smochie project, you would run the following command:
 
 ```
@@ -88,7 +91,9 @@ smochie clone -h
 This will display the help text for smochie, including a list of available options and their descriptions.
 
 # Project Structure
+
 Project directory should look like this:
+
 ```
 /project
   /ui
