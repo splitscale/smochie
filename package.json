@@ -14,7 +14,7 @@
     "yaml": "^2.2.1"
   },
   "name": "smochie",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A command-line tool used to increase productivity and project management.",
   "main": "app.js",
   "type": "module",
