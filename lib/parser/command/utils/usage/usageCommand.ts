@@ -4,10 +4,10 @@ import { FilepathVariables } from '../../../../api/variables/filepathVariables.j
 
 export class UsageCommand implements Command {
   async execute(args: string[]): Promise<void> {
-    console.log(this.readUsage());
+    console.log(this.displayUsage());
   }
 
-  private readUsage(): string {
+  private displayUsage(): string {
     return readFileSync(FilepathVariables.getSmochieDir('usage.txt'), 'utf8');
   }
 }

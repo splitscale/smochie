@@ -8,6 +8,8 @@ export class VersionCommand implements Command {
     const version = JSON.parse(packageJson).version;
     const name = JSON.parse(packageJson).name;
 
+    console.log('burger');
+    console.log(this.displayBanner());
     console.log(`${name} Version: ${version}`);
   }
 
@@ -16,5 +18,9 @@ export class VersionCommand implements Command {
       FilepathVariables.getSmochieDir('package.json'),
       'utf8'
     );
+  }
+
+  private displayBanner(): string {
+    return readFileSync(FilepathVariables.getSmochieDir('banner.txt'), 'utf8');
   }
 }
