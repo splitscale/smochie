@@ -8,7 +8,6 @@ export class VersionCommand implements Command {
     const version = JSON.parse(packageJson).version;
     const name = JSON.parse(packageJson).name;
 
-    console.log('burger');
     console.log(this.displayBanner());
     console.log(`${name} Version: ${version}`);
   }
